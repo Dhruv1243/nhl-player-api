@@ -1,0 +1,45 @@
+/* The entire navbar container */
+.navbar {
+  display: flex; /* Use Flexbox to arrange items in a row */
+  justify-content: space-between; /* Push logo to the left and links to the right */
+  align-items: center; /* Vertically center the items */
+  background-color: #222; /* Dark background for navbar */
+  padding: 20px 40px; /* Spacing inside the navbar (top/bottom: 20px, left/right: 40px) */
+  width: 100%; /* Make navbar span the full width of the page */
+  box-sizing: border-box; /* Include padding inside the width */
+  position: sticky; /* Keeps the navbar fixed at top when scrolling */
+  top: 0; /* Stick to the top of the page */
+  z-index: 999; /* Makes sure the navbar stays on top of other content */
+}
+
+/* The logo/title on the left */
+.navbar-brand {
+  flex-shrink: 0; /* Prevent the logo from shrinking when the window resizes */
+}
+
+/* The actual text (NHL API title) */
+.navbar-title {
+  color: #00bcd4; /* Light blue color for the title */
+  margin: 0; /* Remove default margin */
+  font-size: 1.8rem; /* Slightly larger font */
+  text-decoration: none; /* Remove underline if it's inside a <Link> */
+}
+
+/* Container for the links on the right */
+.navbar-links {
+  display: flex; /* Arrange links horizontally */
+  gap: 20px; /* Space between each link */
+}
+
+/* Each individual navigation link */
+.nav-link {
+  text-decoration: none; /* Remove underline */
+  color: #fff; /* White text */
+  font-weight: 500; /* Slightly bolder text */
+  transition: color 0.3s ease; /* Smooth hover transition */
+}
+
+/* Link hover effect */
+.nav-link:hover {
+  color: #00bcd4; /* Change to blue on hover */
+}

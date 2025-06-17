@@ -1,3 +1,4 @@
+import "./FavoriteTeams.css";
 function FacoriteTeams() {
   return (
     <div className="favorite-teams">

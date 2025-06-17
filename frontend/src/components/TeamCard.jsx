@@ -1,14 +1,22 @@
+import "./TeamCard.css";
+import { useState } from "react";
 function TeamCard({ team }) {
-  function onFavoriteClick() {
-    alert(`clicked`);
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  function toggleFavorite() {
+    setIsFavorite(!isFavorite);
   }
+
   return (
     <div className="team-card">
       <div className="team-image">
         <img src={team.image} alt={team.teamName} />
         <div className="team-overlay">
-          <button className="favorite-btn" onClick={onFavoriteClick}>
-            👍
+          <button
+            className={`favorite-btn ${isFavorite ? "active" : ""}`} //gives it the active class only if isFavorite is true unless its empty
+            onClick={toggleFavorite}
+          >
+            {isFavorite ? "★" : "☆"}
           </button>
         </div>
       </div>
