@@ -22,7 +22,7 @@ export const fetchAllTeams = async () => {
       console.error("Expected array but got:", typeof data, data);
       return [];
     }
-
+    console.log("Active teams:", data);
     const teamsWithLogos = data.map((team) => {
       const teamId = team.id;
       const teamName =
