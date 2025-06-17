@@ -1,22 +1,44 @@
-// Fetch all NHL teams with their name and logo image
+// nhlTeams.js
 export const fetchAllTeams = async () => {
   try {
-    const res = await fetch(
-      `https://corsproxy.io/?https://statsapi.web.nhl.com/api/v1/teams`
-    );
+    const res = await fetch("http://localhost:5000/api/teams");
 
-    const rawData = await res.json();
-    const data = JSON.parse(rawData.contents); // real API data is inside `.contents`
+    // Check if the response is ok
+    if (!res.ok) {
+      throw new Error(`HTTP error! status: ${res.status}`);
+    }
 
-    const teamsWithLogos = data.teams.map((team) => ({
-      id: team.id,
-      teamName: team.name,
-      image: `https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${team.id}.svg`,
-    }));
+    const data = await res.json();
+    console.log("Received data:", data); // Debug log
+
+    // Check if we received an error object
+    if (data.message && data.message.includes("Failed to fetch")) {
+      console.error("Backend returned error:", data);
+      return [];
+    }
+
+    // Ensure data is an array before mapping
+    if (!Array.isArray(data)) {
+      console.error("Expected array but got:", typeof data, data);
+      return [];
+    }
+
+    const teamsWithLogos = data.map((team) => {
+      const teamId = team.id;
+      const teamName = team.teamName;
+
+      const abbreviation = team.abbreviation;
+      return {
+        id: teamId,
+        teamName,
+        abbreviation,
+        image: `https://assets.nhle.com/logos/nhl/svg/${team.abbreviation}_light.svg`,
+      };
+    });
 
     return teamsWithLogos;
   } catch (err) {
     console.error("Failed to fetch NHL teams:", err);
-    return []; // Return empty array if there's an error
+    return [];
   }
 };

@@ -5,6 +5,7 @@ function TeamCard({ team }) {
 
   function toggleFavorite() {
     setIsFavorite(!isFavorite);
+    console.log(team);
   }
 
   return (
