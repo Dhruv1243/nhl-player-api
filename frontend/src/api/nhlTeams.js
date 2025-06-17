@@ -25,14 +25,20 @@ export const fetchAllTeams = async () => {
 
     const teamsWithLogos = data.map((team) => {
       const teamId = team.id;
-      const teamName = team.teamName;
+      const teamName =
+        team.teamName ||
+        team.name ||
+        team.teamFullName ||
+        team.fullName ||
+        "Unknown Team";
 
       const abbreviation = team.abbreviation;
+
       return {
         id: teamId,
         teamName,
         abbreviation,
-        image: `https://assets.nhle.com/logos/nhl/svg/${team.abbreviation}_light.svg`,
+        image: `https://assets.nhle.com/logos/nhl/svg/${abbreviation}_light.svg`,
       };
     });
 
