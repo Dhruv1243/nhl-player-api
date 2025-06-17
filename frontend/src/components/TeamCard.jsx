@@ -5,7 +5,7 @@ function TeamCard({ team }) {
   return (
     <div className="team-card">
       <div className="team-image">
-        <img src={team.image} alt={team.name} />
+        <img src={team.image} alt={team.teamName} />
         <div className="team-overlay">
           <button className="favorite-btn" onClick={onFavoriteClick}>
             👍
@@ -13,7 +13,7 @@ function TeamCard({ team }) {
         </div>
       </div>
       <div className="team-name">
-        <h3>{team.name}</h3>
+        <h3>{team.teamName}</h3>
       </div>
     </div>
   );
