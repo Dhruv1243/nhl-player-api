@@ -12,5 +12,3 @@ app.use("/api/teams", teamsRoutes);
 app.listen(PORT, () =>
   console.log(`Server running at http://localhost:${PORT}`)
 );
-
-//https://api-web.nhle.com/v1/roster/{triCode}/20242025 for players api

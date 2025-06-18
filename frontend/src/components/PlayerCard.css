@@ -1,0 +1,48 @@
+.player-card {
+  width: 200px;
+  height: 300px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.player-card:hover {
+  transform: scale(1.05);
+}
+
+.player-image {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.player-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.player-overlay {
+  position: absolute;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6); /* Semi-transparent black overlay */
+  color: white;
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  transition: background 0.3s ease;
+}
+
+.player-overlay h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.player-overlay h4 {
+  margin: 5px 0 0;
+  font-size: 0.9rem;
+}

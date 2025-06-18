@@ -1,4 +1,5 @@
 import "./TeamCard.css";
+import { Link } from "react-router-dom";
 
 import { useTeamContext } from "../contexts/TeamContext";
 function TeamCard({ team }) {
@@ -16,22 +17,25 @@ function TeamCard({ team }) {
   }
 
   return (
-    <div className="team-card">
-      <div className="team-image">
-        <img src={team.image} alt={team.teamName} />
-        <div className="team-overlay">
-          <button
-            className={`favorite-btn ${favorite ? "active" : ""}`} //gives it the active class only if favorite is true unless its empty
-            onClick={toggleFavorite}
-          >
-            {favorite ? "★" : "☆"}
-          </button>
+    // Link is used to tranform the team abbreviation into a link that will take the user to the players page for that team
+    <Link to={`/teams/${team.abbreviation}/players`} className="team-card-link">
+      <div className="team-card">
+        <div className="team-image">
+          <img src={team.image} alt={team.teamName} />
+          <div className="team-overlay">
+            <button
+              className={`favorite-btn ${favorite ? "active" : ""}`} //gives it the active class only if favorite is true unless its empty
+              onClick={toggleFavorite}
+            >
+              {favorite ? "★" : "☆"}
+            </button>
+          </div>
+        </div>
+        <div className="team-name">
+          <h3>{team.teamName}</h3>
         </div>
       </div>
-      <div className="team-name">
-        <h3>{team.teamName}</h3>
-      </div>
-    </div>
+    </Link>
   );
 }
 
