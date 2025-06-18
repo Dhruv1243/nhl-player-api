@@ -32,12 +32,12 @@ export const getPlayers = async (req, res) => {
   const { abbrev } = req.params;
   //the response will also require a season so we just hardcode it for now
   //this is the 2024-2025 season, you can change it to any valid NHL season
-  const season = "20242025";
+  // const season = "20242025";
 
   try {
     //fetch the roster for the team with the given abbreviation and season
     const response = await fetch(
-      `https://api-web.nhle.com/v1/roster/${abbrev}/${season}`
+      `https://api-web.nhle.com/v1/roster/${abbrev}/current`
     );
     //if theres an error with the response, return a 500 status code
     if (!response.ok) {
@@ -47,16 +47,23 @@ export const getPlayers = async (req, res) => {
     }
     //parse the response as JSON
     const json = await response.json();
+    // json now has { forwards: [...], defensemen: [...], goalies: [...] }
 
-    //map the players data to a simpler format
-    //p is each player object in the players array, it can be called anything. we just need to get the name, position, and jersey number
-    //the ? is = to if json.date is not null or undefined, then access the players property, otherwise use an empty array
-    //this is a safe way to access nested properties in JavaScript
-    const players = (json.data?.players || []).map((p) => ({
-      id: p.person.id,
-      name: p.person.fullName,
-      position: p.position.name,
-      number: p.jerseyNumber,
+    // 1. Pull out each group (falling back to empty array if missing)
+    const forwards = Array.isArray(json.forwards) ? json.forwards : [];
+    const defensemen = Array.isArray(json.defensemen) ? json.defensemen : [];
+    const goalies = Array.isArray(json.goalies) ? json.goalies : [];
+
+    // 2. Combine them into one flat array
+    const allPlayers = [...forwards, ...defensemen, ...goalies];
+
+    // 3. Map to the shape your frontend expects
+    const players = allPlayers.map((p) => ({
+      id: p.id,
+      name: `${p.firstName.default} ${p.lastName.default}`,
+      position: p.positionCode, // use the single‐letter code or map it if you prefer
+      number: p.sweaterNumber,
+      headshot: p.headshot, // if you want to display the mugshot
     }));
     //send our trimmed down players data
     res.json(players);

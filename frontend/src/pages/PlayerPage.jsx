@@ -1,6 +1,7 @@
 // src/pages/PlayersPage.jsx
 import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import PlayerCard from "../components/PlayerCard"; // ← import your card
 import "./PlayersPage.css";
 
 export default function PlayersPage() {
@@ -17,10 +18,8 @@ export default function PlayersPage() {
           `http://localhost:5000/api/teams/${abbrev}/players`
         );
         if (!res.ok) throw new Error(res.statusText);
-        const data = await res.json();
-        setPlayers(data);
-      } catch (err) {
-        console.error(err);
+        setPlayers(await res.json());
+      } catch {
         setError("Unable to load players");
       } finally {
         setLoading(false);
@@ -30,19 +29,19 @@ export default function PlayersPage() {
   }, [abbrev]);
 
   if (loading) return <p>Loading roster…</p>;
-  if (error) return <p style={{ color: "red" }}>{error}</p>;
+  if (error) return <p className="error">{error}</p>;
 
   return (
     <div className="players-page">
-      <Link to="/home">← Back to teams</Link>
+      <Link to="/home" className="back-link">
+        ← Back to teams
+      </Link>
       <h2>Roster — {abbrev}</h2>
-      <ul className="player-list">
+      <div className="player-grid">
         {players.map((p) => (
-          <li key={p.id}>
-            #{p.number} — {p.name} ({p.position})
-          </li>
+          <PlayerCard key={p.id} player={p} />
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
