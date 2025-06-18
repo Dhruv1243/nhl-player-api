@@ -5,7 +5,13 @@ import teamsRoutes from "./routes/teams.js";
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(cors());
+const allowedOrigins = ["https://nhl-ui.onrender.com"];
+
+app.use(
+  cors({
+    origin: allowedOrigins,
+  })
+);
 
 app.use("/api/teams", teamsRoutes);
 
