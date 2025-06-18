@@ -9,14 +9,13 @@ export default function PlayersPage() {
   const [players, setPlayers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const API_BASE = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     async function loadRoster() {
       try {
         setLoading(true);
-        const res = await fetch(
-          `http://localhost:5000/api/teams/${abbrev}/players`
-        );
+        const res = await fetch(`${API_BASE}/api/teams/${abbrev}/players`);
         if (!res.ok) throw new Error(res.statusText);
         setPlayers(await res.json());
       } catch {

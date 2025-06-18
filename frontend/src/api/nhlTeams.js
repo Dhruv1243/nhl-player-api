@@ -1,7 +1,9 @@
 // nhlTeams.js
+
 export const fetchAllTeams = async () => {
+  const API_BASE = import.meta.env.VITE_API_URL;
   try {
-    const res = await fetch("http://localhost:5000/api/teams");
+    const res = await fetch(`${API_BASE}/api/teams`);
 
     // Check if the response is ok
     if (!res.ok) {
