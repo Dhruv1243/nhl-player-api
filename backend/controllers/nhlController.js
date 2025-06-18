@@ -63,7 +63,7 @@ export const getPlayers = async (req, res) => {
       name: `${p.firstName.default} ${p.lastName.default}`,
       position: p.positionCode, // use the single‐letter code or map it if you prefer
       number: p.sweaterNumber,
-      headshot: p.headshot, // if you want to display the mugshot
+      image: p.headshot, // if you want to display the mugshot
     }));
     //send our trimmed down players data
     res.json(players);
