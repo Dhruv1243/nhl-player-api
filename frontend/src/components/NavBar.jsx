@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
+import nhlLogo from "../assets/nhlapilogo.png";
 import "./NavBar.css";
 function NavBar() {
   return (
     <nav className="navbar">
       <div className="navbar-brand">
         <Link to="/" className="nav-link">
-          <h1 className="navbar-title">NHL API</h1>
+          <img src={nhlLogo} alt="NHL Logo" className="logo" />
         </Link>
       </div>
       <div className="navbar-links">

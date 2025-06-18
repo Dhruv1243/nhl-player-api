@@ -9,7 +9,7 @@ const allowedOrigins = ["https://nhl-ui.onrender.com"];
 
 app.use(
   cors({
-    origin: allowedOrigins,
+    origin: "*", // 👈 Allow from any domain (good for testing, not production)
   })
 );
 
