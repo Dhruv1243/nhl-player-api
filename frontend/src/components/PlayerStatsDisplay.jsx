@@ -12,19 +12,21 @@ const PlayerStatsDisplay = ({ stats }) => {
     weight,
     shoots,
     stats: statBlock,
+    careerStats: careerStatBlock,
   } = stats;
 
   const isGoalie = position === "G";
 
   return (
     <div className="player-stats-card">
-      <h2>{name} 2024-2025 Season</h2>
+      <h2>{name}</h2>
       <p>Position: {position}</p>
       <p>Age: {age}</p>
       <p>Height: {height}</p>
       <p>Weight: {weight}</p>
       <p>Shoots: {shoots}</p>
 
+      <h1>Current Season</h1>
       <div className="stats-section">
         <p>Games Played: {statBlock.gamesPlayed}</p>
 
@@ -35,6 +37,7 @@ const PlayerStatsDisplay = ({ stats }) => {
             <p>Shutouts: {statBlock.shutouts}</p>
             <p>Wins: {statBlock.wins}</p>
             <p>Losses: {statBlock.losses}</p>
+            <p>Overtime Losses: {statBlock.otLosses}</p>
           </>
         ) : (
           <>
@@ -46,6 +49,32 @@ const PlayerStatsDisplay = ({ stats }) => {
             <p>PIM: {statBlock.pim}</p>
             <p>PP Goals: {statBlock.powerPlayGoals}</p>
             <p>SH Goals: {statBlock.shortHandedGoals}</p>
+          </>
+        )}
+      </div>
+      <h1>Career Stats</h1>
+      <div className="stats-section">
+        <p>Games Played: {careerStatBlock.gamesPlayed}</p>
+
+        {isGoalie ? (
+          <>
+            <p>Save %: {careerStatBlock.savePctg}</p>
+            <p>Goals Against Avg: {careerStatBlock.goalsAgainstAvg}</p>
+            <p>Shutouts: {careerStatBlock.shutouts}</p>
+            <p>Wins: {careerStatBlock.wins}</p>
+            <p>Losses: {careerStatBlock.losses}</p>
+            <p>Overtime Losses: {careerStatBlock.otLosses}</p>
+          </>
+        ) : (
+          <>
+            <p>Goals: {careerStatBlock.goals}</p>
+            <p>Assists: {careerStatBlock.assists}</p>
+            <p>Points: {careerStatBlock.points}</p>
+            <p>Shots: {careerStatBlock.shots}</p>
+            <p>+/-: {careerStatBlock.plusMinus}</p>
+            <p>PIM: {careerStatBlock.pim}</p>
+            <p>PP Goals: {careerStatBlock.powerPlayGoals}</p>
+            <p>SH Goals: {careerStatBlock.shortHandedGoals}</p>
           </>
         )}
       </div>

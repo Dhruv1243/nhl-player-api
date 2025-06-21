@@ -47,7 +47,7 @@ export const getStats = async (req, res) => {
     }
 
     const stats = data.featuredStats.regularSeason.subSeason;
-    const careerStats = data.featuredStats.careerSeason;
+    const careerStats = data.careerTotals?.regularSeason;
 
     const playerInfo = {
       id: playerId,
@@ -78,6 +78,7 @@ export const getStats = async (req, res) => {
         shutouts: stats.shutouts ?? "N/A",
         wins: stats.wins ?? "N/A",
         losses: stats.losses ?? "N/A",
+        otLosses: stats.otLosses ?? "N/A",
       },
       careerStats: {
         gamesPlayed: careerStats.gamesPlayed ?? "N/A",
@@ -94,6 +95,7 @@ export const getStats = async (req, res) => {
         shutouts: careerStats.shutouts ?? "N/A",
         wins: careerStats.wins ?? "N/A",
         losses: careerStats.losses ?? "N/A",
+        otLosses: careerStats.otLosses ?? "N/A",
       },
     };
 
