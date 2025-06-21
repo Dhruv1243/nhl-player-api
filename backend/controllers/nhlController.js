@@ -47,6 +47,7 @@ export const getStats = async (req, res) => {
     }
 
     const stats = data.featuredStats.regularSeason.subSeason;
+    const careerStats = data.featuredStats.careerSeason;
 
     const playerInfo = {
       id: playerId,
@@ -72,6 +73,27 @@ export const getStats = async (req, res) => {
         pim: stats.pim ?? "N/A",
         powerPlayGoals: stats.powerPlayGoals ?? "N/A",
         shortHandedGoals: stats.shorthandedGoals ?? "N/A",
+        goalsAgainstAvg: stats.goalsAgainstAvg ?? "N/A",
+        savePctg: stats.savePctg ?? "N/A",
+        shutouts: stats.shutouts ?? "N/A",
+        wins: stats.wins ?? "N/A",
+        losses: stats.losses ?? "N/A",
+      },
+      careerStats: {
+        gamesPlayed: careerStats.gamesPlayed ?? "N/A",
+        goals: careerStats.goals ?? "N/A",
+        assists: careerStats.assists ?? "N/A",
+        points: careerStats.points ?? "N/A",
+        shots: careerStats.shots ?? "N/A",
+        plusMinus: careerStats.plusMinus ?? "N/A",
+        pim: careerStats.pim ?? "N/A",
+        powerPlayGoals: careerStats.powerPlayGoals ?? "N/A",
+        shortHandedGoals: careerStats.shorthandedGoals ?? "N/A",
+        goalsAgainstAvg: careerStats.goalsAgainstAvg ?? "N/A",
+        savePctg: careerStats.savePctg ?? "N/A",
+        shutouts: careerStats.shutouts ?? "N/A",
+        wins: careerStats.wins ?? "N/A",
+        losses: careerStats.losses ?? "N/A",
       },
     };
 

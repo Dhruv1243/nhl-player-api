@@ -30,8 +30,11 @@ const PlayerStatsDisplay = ({ stats }) => {
 
         {isGoalie ? (
           <>
-            <p>Save %: {statBlock.savePercentage}</p>
-            <p>Goals Against Avg: {statBlock.goalsAgainstAverage}</p>
+            <p>Save %: {statBlock.savePctg}</p>
+            <p>Goals Against Avg: {statBlock.goalsAgainstAvg}</p>
+            <p>Shutouts: {statBlock.shutouts}</p>
+            <p>Wins: {statBlock.wins}</p>
+            <p>Losses: {statBlock.losses}</p>
           </>
         ) : (
           <>
