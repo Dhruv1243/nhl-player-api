@@ -1,33 +1,51 @@
 import React from "react";
+import "./PlayerStatsDisplay.css";
 
 const PlayerStatsDisplay = ({ stats }) => {
   if (!stats) return <p>Loading stats...</p>;
 
-  const isGoalie = stats.position === "G";
+  const {
+    name,
+    position,
+    age,
+    height,
+    weight,
+    shoots,
+    stats: statBlock,
+  } = stats;
+
+  const isGoalie = position === "G";
 
   return (
     <div className="player-stats-card">
-      <h2>{stats.name}</h2>
-      <p>Position: {stats.position}</p>
-      <p>Age: {stats.age}</p>
-      <p>Height: {stats.height}</p>
-      <p>Weight: {stats.weight}</p>
-      <p>Shoots: {stats.shoots}</p>
+      <h2>{name} 2024-2025 Season</h2>
+      <p>Position: {position}</p>
+      <p>Age: {age}</p>
+      <p>Height: {height}</p>
+      <p>Weight: {weight}</p>
+      <p>Shoots: {shoots}</p>
 
-      {isGoalie ? (
-        <div className="goalie-stats">
-          <p>Games Played: {stats.games}</p>
-          <p>Save %: {stats.savePercentage}</p>
-          <p>Goals Against Avg: {stats.goalsAgainstAverage}</p>
-        </div>
-      ) : (
-        <div className="skater-stats">
-          <p>Games Played: {stats.games}</p>
-          <p>Goals: {stats.goals}</p>
-          <p>Assists: {stats.assists}</p>
-          <p>Points: {stats.points}</p>
-        </div>
-      )}
+      <div className="stats-section">
+        <p>Games Played: {statBlock.gamesPlayed}</p>
+
+        {isGoalie ? (
+          <>
+            <p>Save %: {statBlock.savePercentage}</p>
+            <p>Goals Against Avg: {statBlock.goalsAgainstAverage}</p>
+          </>
+        ) : (
+          <>
+            <p>Goals: {statBlock.goals}</p>
+            <p>Assists: {statBlock.assists}</p>
+            <p>Points: {statBlock.points}</p>
+            <p>Shots: {statBlock.shots}</p>
+            <p>+/-: {statBlock.plusMinus}</p>
+            <p>PIM: {statBlock.pim}</p>
+            <p>PP Goals: {statBlock.powerPlayGoals}</p>
+            <p>SH Goals: {statBlock.shortHandedGoals}</p>
+          </>
+        )}
+      </div>
     </div>
   );
 };

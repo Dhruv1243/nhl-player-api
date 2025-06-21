@@ -26,48 +26,65 @@ export const getTeams = async (req, res) => {
     res.status(500).json({ message: "Failed to fetch NHL data" });
   }
 };
+
 export const getStats = async (req, res) => {
+  const playerId = req.params.playerId;
+  const NHL_API_URL = `https://api-web.nhle.com/v1/player/${playerId}/landing`;
+
   try {
-    const res = await fetch(
-      `https://api-web.nhle.com/v1/player/${playerId}/landing`
-    );
+    console.log(`Fetching stats for player: ${playerId}`);
+    const response = await fetch(NHL_API_URL);
+
     if (!response.ok) {
-      return res
-        .status(response.status)
-        .json({ message: `NHL API error: ${response.statusText}` });
+      throw new Error(`NHL API error: ${response.statusText}`);
     }
-    const data = await res.json();
-    // Extract the stats you need from the data
-    const stats =
-      data?.featuredStats?.regularSeason?.subSeason?.[0]?.stat || {}; // Adjust the path based on the actual structure of the response
-    const playerInfo = data?.player || {}; //combine player info with stats
-    return {
-      name: playerInfo.firstName.default + " " + playerInfo.lastName.default,
-      position: playerInfo.position,
-      shoots: playerInfo.shootsCatches,
-      age: playerInfo.birthDate ? getAge(playerInfo.birthDate) : "N/A",
-      height: playerInfo.heightInInches
-        ? `${Math.floor(playerInfo.heightInInches / 12)}'${
-            playerInfo.heightInInches % 12
-          }"`
-        : "N/A",
-      weight: playerInfo.weightInPounds
-        ? `${playerInfo.weightInPounds} lbs`
-        : "N/A",
-      goals: stats.goals ?? "N/A",
-      assists: stats.assists ?? "N/A",
-      points: stats.points ?? "N/A",
-      games: stats.gamesPlayed ?? "N/A",
-      savePercentage: stats.savePct ?? "N/A",
-      goalsAgainstAverage: stats.goalAgainstAvg ?? "N/A",
+
+    const data = await response.json();
+
+    if (!data || !data.featuredStats?.regularSeason?.subSeason) {
+      console.error("❌ Player data missing or incomplete");
+      return res.status(404).json({ error: "Player data not found" });
+    }
+
+    const stats = data.featuredStats.regularSeason.subSeason;
+
+    const playerInfo = {
+      id: playerId,
+      name: `${data.firstName?.default || "Unknown"} ${
+        data.lastName?.default || ""
+      }`,
+      number: data.sweaterNumber || "N/A",
+      position: data.position || "N/A",
+      team: data.fullTeamName?.default || "N/A",
+      teamLogo: data.teamLogo || null,
+      age: calculateAge(data.birthDate),
+      height: formatHeight(data.heightInInches),
+      weight: `${data.weightInPounds || "?"} lbs`,
+      shoots: data.shootsCatches || "N/A",
+      headshot: data.headshot || null,
+      stats: {
+        gamesPlayed: stats.gamesPlayed ?? "N/A",
+        goals: stats.goals ?? "N/A",
+        assists: stats.assists ?? "N/A",
+        points: stats.points ?? "N/A",
+        shots: stats.shots ?? "N/A",
+        plusMinus: stats.plusMinus ?? "N/A",
+        pim: stats.pim ?? "N/A",
+        powerPlayGoals: stats.powerPlayGoals ?? "N/A",
+        shortHandedGoals: stats.shorthandedGoals ?? "N/A",
+      },
     };
+
+    res.json(playerInfo);
   } catch (err) {
-    console.error("Error fetching NHL stats:", err);
-    res.status(500).json({ message: "Failed to fetch NHL stats" });
+    console.error("🔥 BACKEND ERROR:", err.message);
+    res.status(500).json({ error: "Failed to fetch player stats" });
   }
 };
-// Utility function to calculate age from birth date
-const getAge = (birthDateStr) => {
+
+// Helper to calculate age
+function calculateAge(birthDateStr) {
+  if (!birthDateStr) return "Unknown";
   const birthDate = new Date(birthDateStr);
   const today = new Date();
   let age = today.getFullYear() - birthDate.getFullYear();
@@ -76,7 +93,15 @@ const getAge = (birthDateStr) => {
     age--;
   }
   return age;
-};
+}
+
+// Helper to format height from inches to ft'in"
+function formatHeight(inches) {
+  if (!inches) return "Unknown";
+  const ft = Math.floor(inches / 12);
+  const rem = inches % 12;
+  return `${ft}'${rem}"`;
+}
 
 export const getPlayers = async (req, res) => {
   //pull the abbrev param out of url

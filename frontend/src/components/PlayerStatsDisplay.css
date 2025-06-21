@@ -1,0 +1,59 @@
+.player-stats-card {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 32px;
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  font-family: "Inter", sans-serif;
+  color: #1a1a1a;
+  transition: transform 0.2s ease;
+}
+
+.player-stats-card:hover {
+  transform: scale(1.01);
+}
+
+.player-stats-card h2 {
+  font-size: 30px;
+  font-weight: 700;
+  color: #0a66c2;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.player-stats-card p {
+  font-size: 16px;
+  margin: 6px 0;
+}
+
+.stats-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 24px;
+  margin-top: 24px;
+  border-top: 1px solid #eee;
+  padding-top: 20px;
+}
+
+.stats-section p {
+  background-color: #f7f9fc;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-weight: 500;
+  color: #333;
+}
+
+@media (max-width: 600px) {
+  .stats-section {
+    grid-template-columns: 1fr;
+  }
+
+  .player-stats-card {
+    padding: 20px;
+  }
+
+  .player-stats-card h2 {
+    font-size: 24px;
+  }
+}
