@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import PlayerStatsDisplay from "../components/PlayerStatsDisplay";
+import "./PlayerStatsPage.css"; // Assuming you have a CSS file for styling
 
 function PlayerStatsPage() {
   const { playerId } = useParams();

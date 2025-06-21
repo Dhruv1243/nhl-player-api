@@ -1,5 +1,6 @@
 .player-card {
-  width: 200px;
+  width: 100%;
+  max-width: 200px;
   height: 300px;
   border-radius: 12px;
   overflow: hidden;
@@ -7,6 +8,7 @@
   transition: transform 0.3s ease;
   cursor: pointer;
   position: relative;
+  margin: auto;
 }
 
 .player-card:hover {
@@ -29,7 +31,7 @@
 .player-overlay {
   position: absolute;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.6); /* Semi-transparent black overlay */
+  background: rgba(0, 0, 0, 0.6);
   color: white;
   width: 100%;
   padding: 10px;
@@ -45,4 +47,24 @@
 .player-overlay h4 {
   margin: 5px 0 0;
   font-size: 0.9rem;
+}
+
+/* ============================= */
+/*         MOBILE STYLING        */
+/* ============================= */
+
+@media (max-width: 768px) {
+  .player-card {
+    max-width: 90%;
+    height: auto;
+    aspect-ratio: 2 / 3; /* Keeps card shape proportional */
+  }
+
+  .player-overlay h3 {
+    font-size: 1rem;
+  }
+
+  .player-overlay h4 {
+    font-size: 0.85rem;
+  }
 }

@@ -6,21 +6,16 @@
   color: white;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   transition: transform 0.2s ease;
-  width: 300px; /* ⬅️ Bigger width */
-  height: 360px; /* ⬅️ Taller card */
+  width: 300px;
+  height: 360px;
   position: relative;
+  box-sizing: border-box;
 }
 
 .team-card:hover {
   transform: translateY(-5px);
   box-shadow: 10px 10px 5px #000000;
-  -moz-box-shadow: 0px 10px 5px #000000;
-  -webkit-box-shadow: 0px 10px 5px #000000;
   -webkit-filter: brightness(70%);
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  -ms-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
 
@@ -32,15 +27,15 @@
   z-index: 1;
 }
 
-/* Base styles */
+/* Favorite button */
 .favorite-btn {
   font-size: 24px;
   color: #666;
   cursor: pointer;
   background: none;
   border: none;
-  outline: none; /* ← removes browser default focus ring */
-  box-shadow: none; /* ← removes possible inset shadows */
+  outline: none;
+  box-shadow: none;
   transition: transform 0.2s ease, color 0.2s ease;
 }
 
@@ -48,13 +43,11 @@
   transform: scale(1.2);
 }
 
-/* When favorited */
 .favorite-btn.active {
   color: #00bcd4;
   animation: pop 0.3s ease;
 }
 
-/* Animation keyframes */
 @keyframes pop {
   0% {
     transform: scale(1);
@@ -67,25 +60,53 @@
   }
 }
 
-/* Logo container */
+/* Team logo */
 .team-image img {
   width: 100%;
   height: 300px;
-  min-height: 140px; /* Ensure consistent height even if image doesn't load */
-  object-fit: contain; /* Keeps aspect ratio while scaling to fit */
-  background-color: white; /* Creates the white box you want */
+  min-height: 140px;
+  object-fit: contain;
+  background-color: white;
   border-radius: 8px;
   display: block;
   margin: 0 auto;
 }
 
-/* Team name at bottom */
+/* Team name */
 .team-name h3 {
   margin: 0;
   font-size: 1rem;
   font-weight: bold;
 }
+
+/* Anchor reset */
 .team-card-link {
   text-decoration: none;
   color: inherit;
+}
+
+/* ========================== */
+/*     RESPONSIVE STYLES     */
+/* ========================== */
+
+@media (max-width: 768px) {
+  .team-card {
+    width: 90%;
+    height: auto;
+    padding: 16px;
+    margin: 12px auto;
+  }
+
+  .team-image img {
+    height: auto;
+    max-height: 200px;
+  }
+
+  .team-name h3 {
+    font-size: 1.1rem;
+  }
+
+  .favorite-btn {
+    font-size: 22px;
+  }
 }

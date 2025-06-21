@@ -48,12 +48,23 @@ export const getStats = async (req, res) => {
 
     const stats = data.featuredStats.regularSeason.subSeason;
     const careerStats = data.careerTotals?.regularSeason;
+    const careerPlayoffStats = data.careerTotals?.playoffs;
+    const draftInfo = data.draftDetails || {};
 
     const playerInfo = {
       id: playerId,
       name: `${data.firstName?.default || "Unknown"} ${
         data.lastName?.default || ""
       }`,
+      hometown:
+        [
+          data.birthCity?.default,
+          data.birthStateProvince?.default,
+          data.birthCountry,
+        ]
+          .filter(Boolean)
+          .join(", ") || "N/A",
+
       number: data.sweaterNumber || "N/A",
       position: data.position || "N/A",
       team: data.fullTeamName?.default || "N/A",
@@ -96,6 +107,28 @@ export const getStats = async (req, res) => {
         wins: careerStats.wins ?? "N/A",
         losses: careerStats.losses ?? "N/A",
         otLosses: careerStats.otLosses ?? "N/A",
+      },
+      draftInfo: {
+        year: draftInfo.year || "N/A",
+        overallPick: draftInfo.overallPick || "N/A",
+        team: draftInfo.teamAbbrev || "N/A",
+      },
+      careerPlayoffStats: {
+        gamesPlayed: careerPlayoffStats?.gamesPlayed ?? "N/A",
+        goals: careerPlayoffStats?.goals ?? "N/A",
+        assists: careerPlayoffStats?.assists ?? "N/A",
+        points: careerPlayoffStats?.points ?? "N/A",
+        shots: careerPlayoffStats?.shots ?? "N/A",
+        plusMinus: careerPlayoffStats?.plusMinus ?? "N/A",
+        pim: careerPlayoffStats?.pim ?? "N/A",
+        powerPlayGoals: careerPlayoffStats?.powerPlayGoals ?? "N/A",
+        shortHandedGoals: careerPlayoffStats?.shorthandedGoals ?? "N/A",
+        goalsAgainstAvg: careerPlayoffStats?.goalsAgainstAvg ?? "N/A",
+        savePctg: careerPlayoffStats?.savePctg ?? "N/A",
+        shutouts: careerPlayoffStats?.shutouts ?? "N/A",
+        wins: careerPlayoffStats?.wins ?? "N/A",
+        losses: careerPlayoffStats?.losses ?? "N/A",
+        otLosses: careerPlayoffStats?.otLosses ?? "N/A",
       },
     };
 

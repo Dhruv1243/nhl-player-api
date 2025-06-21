@@ -1,0 +1,27 @@
+/* ========================= */
+/*     PlayerStatsPage      */
+/* ========================= */
+
+.stats-grid {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* ⬅️ aligns it to top instead of stretching */
+  padding: 40px 20px;
+  flex-wrap: wrap;
+}
+
+.error {
+  color: red;
+  text-align: center;
+  font-weight: bold;
+  padding: 20px;
+  font-size: 1.2rem;
+}
+
+@media (max-width: 600px) {
+  .stats-grid {
+    padding: 20px 10px;
+    flex-direction: column;
+    min-height: auto;
+  }
+}

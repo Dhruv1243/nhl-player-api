@@ -13,6 +13,8 @@ const PlayerStatsDisplay = ({ stats }) => {
     shoots,
     stats: statBlock,
     careerStats: careerStatBlock,
+    draftInfo: draftInfoBlock,
+    careerPlayoffStats: careerPlayoffStatsBlock,
   } = stats;
 
   const isGoalie = position === "G";
@@ -25,6 +27,10 @@ const PlayerStatsDisplay = ({ stats }) => {
       <p>Height: {height}</p>
       <p>Weight: {weight}</p>
       <p>Shoots: {shoots}</p>
+      <p>Nationality: {stats.hometown}</p>
+      <p>Year Drafted: {draftInfoBlock.year}</p>
+      <p>Overall Pick: {draftInfoBlock.overallPick}</p>
+      <p>Drafted By: {draftInfoBlock.team}</p>
 
       <h1>Current Season</h1>
       <div className="stats-section">
@@ -75,6 +81,32 @@ const PlayerStatsDisplay = ({ stats }) => {
             <p>PIM: {careerStatBlock.pim}</p>
             <p>PP Goals: {careerStatBlock.powerPlayGoals}</p>
             <p>SH Goals: {careerStatBlock.shortHandedGoals}</p>
+          </>
+        )}
+      </div>
+      <h1>Career Playoff Stats</h1>
+      <div className="stats-section">
+        <p>Games Played: {careerPlayoffStatsBlock.gamesPlayed}</p>
+
+        {isGoalie ? (
+          <>
+            <p>Save %: {careerPlayoffStatsBlock.savePctg}</p>
+            <p>Goals Against Avg: {careerPlayoffStatsBlock.goalsAgainstAvg}</p>
+            <p>Shutouts: {careerPlayoffStatsBlock.shutouts}</p>
+            <p>Wins: {careerPlayoffStatsBlock.wins}</p>
+            <p>Losses: {careerPlayoffStatsBlock.losses}</p>
+            <p>Overtime Losses: {careerPlayoffStatsBlock.otLosses}</p>
+          </>
+        ) : (
+          <>
+            <p>Goals: {careerPlayoffStatsBlock.goals}</p>
+            <p>Assists: {careerPlayoffStatsBlock.assists}</p>
+            <p>Points: {careerPlayoffStatsBlock.points}</p>
+            <p>Shots: {careerPlayoffStatsBlock.shots}</p>
+            <p>+/-: {careerPlayoffStatsBlock.plusMinus}</p>
+            <p>PIM: {careerPlayoffStatsBlock.pim}</p>
+            <p>PP Goals: {careerPlayoffStatsBlock.powerPlayGoals}</p>
+            <p>SH Goals: {careerPlayoffStatsBlock.shortHandedGoals}</p>
           </>
         )}
       </div>

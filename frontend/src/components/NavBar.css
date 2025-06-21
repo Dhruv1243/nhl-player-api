@@ -3,16 +3,17 @@
 /* ============================= */
 
 .navbar {
-  display: flex; /* Use Flexbox to align children horizontally */
-  justify-content: space-between; /* Push brand/logo to left, links to right */
-  align-items: center; /* Vertically center all content */
-  background-color: #101820; /* Dark background */
-  padding: 0.8rem 2rem; /* Top-bottom 0.8rem, left-right 2rem padding */
-  color: white; /* Default text color */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4); /* Subtle shadow for elevation */
-  position: sticky; /* Stick to top when scrolling */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #101820;
+  padding: 0.8rem 2rem;
+  color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+  position: sticky;
   top: 0;
-  z-index: 999; /* Ensure it stays on top of other elements */
+  z-index: 999;
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
 }
 
 /* ============================= */
@@ -20,14 +21,13 @@
 /* ============================= */
 
 .navbar-brand img.logo {
-  height: 48px; /* Fixed height */
-  width: auto; /* Keep aspect ratio */
-  transition: transform 0.3s ease; /* Smooth zoom on hover */
+  height: 48px;
+  width: auto;
+  transition: transform 0.3s ease;
 }
 
-/* Logo hover effect */
 .navbar-brand img.logo:hover {
-  transform: scale(1.1); /* Zoom in on hover */
+  transform: scale(1.1);
 }
 
 /* ============================= */
@@ -35,8 +35,8 @@
 /* ============================= */
 
 .navbar-links {
-  display: flex; /* Display links in a row */
-  gap: 1.5rem; /* Space between links */
+  display: flex;
+  gap: 1.5rem;
 }
 
 /* ============================= */
@@ -44,32 +44,61 @@
 /* ============================= */
 
 .nav-link {
-  color: white; /* White by default */
-  text-decoration: none; /* No underlines */
-  font-size: 1.1rem; /* Slightly larger font */
-  font-weight: 500; /* Medium boldness */
-  position: relative; /* For the hover underline effect */
-  transition: color 0.3s ease; /* Smooth color transition on hover */
+  color: white;
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 500;
+  position: relative;
+  transition: color 0.3s ease;
 }
 
-/* Underline animation (hidden by default) */
 .nav-link::after {
   content: "";
   display: block;
-  width: 0%; /* Hidden initially */
+  width: 0%;
   height: 2px;
-  background-color: #00bcd4; /* Cyan underline */
+  background-color: #00bcd4;
   transition: width 0.3s;
   position: absolute;
-  bottom: -4px; /* Slight space below text */
+  bottom: -4px;
   left: 0;
 }
 
-/* Hover effects for nav links */
 .nav-link:hover {
-  color: #00bcd4; /* Change color on hover */
+  color: #00bcd4;
 }
 
 .nav-link:hover::after {
-  width: 100%; /* Animate underline in from left to right */
+  width: 100%;
+}
+
+/* ============================= */
+/*        MOBILE STYLING        */
+/* ============================= */
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+  }
+
+  .navbar-links {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.8rem;
+    margin-top: 1rem;
+  }
+
+  .nav-link {
+    font-size: 1rem;
+    padding-left: 0.5rem;
+  }
+
+  .navbar-brand {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 }
