@@ -6,7 +6,7 @@ function PlayerCard({ player }) {
       <div className="player-image">
         <img src={player.image} alt={player.name} />
         <div className="player-overlay">
-          <h3>{player.name}</h3>
+          <h2>{player.name}</h2>
           <h4>{player.position}</h4>
           <h4>#:{player.number}</h4>
         </div>

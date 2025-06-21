@@ -1,5 +1,9 @@
 import express from "express";
-import { getTeams, getPlayers } from "../controllers/nhlController.js";
+import {
+  getTeams,
+  getPlayers,
+  getStats,
+} from "../controllers/nhlController.js";
 
 const router = express.Router();
 
@@ -10,5 +14,7 @@ router.get("/:abbrev/players", getPlayers);
 // :abbrev is a route parameter that will be replaced with the actual team abbreviation
 //will be available to the handler as req.params.abbrev
 //when this url is hit express will call the getPlayers function from the nhlController.js file
+router.get("/players/:playerId", getStats);
+// this route will handle requests to get stats for a specific player by their ID
 
 export default router;
